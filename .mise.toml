@@ -1,0 +1,23 @@
+[tools]
+tuist = "4.33.0"
+
+[tasks.build]
+run = 'tuist build'
+
+[tasks.clean]
+run = 'tuist clean'
+
+[tasks."feature:create"]
+description = "--name <FEATURE_NAME>"
+run = [
+    './Scripts/feature_append.sh {{ option(name="name") }} Tuist/ProjectDescriptionHelpers/Features.swift',
+    'tuist scaffold Feature --name {{ option(name="name") }}',
+    'tuist generate',
+    'tuist build "Feature-{{ option(name="name") }}"'
+]
+
+[tasks.generate]
+run = 'tuist generate'
+
+[tasks.install]
+run = 'tuist install'
